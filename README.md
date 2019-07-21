@@ -49,4 +49,14 @@ Software used:
 codes here
 ```
 
+## Create Database
+```
+codes here
+```
+
+## Start Program
+Write inside the folder
+```
+sudo python3 START.py
+```
 
