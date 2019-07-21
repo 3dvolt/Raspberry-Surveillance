@@ -6,7 +6,6 @@ from flask_basicauth import BasicAuth
 from mail import sendEmail
 from time import sleep
 from datetime import datetime
-from PIL import Image
 import time
 import traceback
 from flask import Flask, session, redirect, url_for, escape, request, render_template, Response, flash, abort
@@ -28,15 +27,15 @@ app.config['MYSQL_DB'] = 'sorveglianza'
 mysql = MySQL(app)
 last_epoch = 0
 
-#variabili globali
+#global var
 global panServoAngle
 global tiltServoAngle
 
-#angolo massimo
+#angle max
 panServoAngle = 90
 tiltServoAngle = 90
 
-#pin servo connessi
+#pin servo
 panPin = 27
 tiltPin = 17
 
@@ -49,28 +48,25 @@ def check_for_objects():
 			if found_obj and (time.time() - last_epoch) > email_update_interval:
 				last_epoch = time.time()
 				print("Image captured...")
-				#img  = Image.open(frame)
-				#nomefile=("static/img/%s") % (str(datetime.now()))
-				#img.save(nomefile.jpg, format)
 				sendEmail(frame)
 				print("Sending email...")
 				print("done!")
 		except:
 			print(traceback.format_exc())
-			
-			
+
+
 def gen(camera):
-	#streamdellaRpiCamera
+	#streamRpiCamera
     while True:
         frame = camera.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-#pagina principale
+#mainpage
 @app.route('/')
 def index():
-      	return render_template('login.html') #di default nella pagina di Login
+      	return render_template('login.html') #default LoginPage
 
 @app.route('/video_feed')
 def video_feed():
@@ -78,7 +74,7 @@ def video_feed():
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
-#gestione Login
+#manage Login
 @app.route('/login',methods=["GET","POST"])
 def login():
     if request.method == 'POST':
@@ -93,12 +89,12 @@ def login():
                 cur = mysql.connection.cursor()
                 Accessi = cur.execute("SELECT a.dataora,u.nome,u.permessi FROM accessi a, utente u where u.ID=a.fkutente limit 5")
                 userDetails = cur.fetchall()
-				
+
                 currr = mysql.connection.cursor()
                 USer = currr.execute("SELECT u.nome FROM utente u where u.username=%s",(email,))
                 Username = currr.fetchone()
                 Username=''.join(Username)
-				
+
                 currrr = mysql.connection.cursor()
                 ril = currrr.execute("SELECT a.dataora,a.tipologia_rilevamento,a.email FROM allerte a")
                 rilevamento = currrr.fetchall()
@@ -114,7 +110,7 @@ def login():
     else:
         return index()#render_template("login.html")
 
-#logout della area privata
+#logout
 @app.route('/logout', methods=["GET", "POST"])
 def logout():
     session.clear()
@@ -142,7 +138,7 @@ def impostazioni():
 			cur.execute("update impostazioni set motore = %s, psw = %s, toemail = %s, email =%s", (motor, Password_mittente, Email_destinatario, Email_mittente))
 			mysql.connection.commit()
 			return index()
-			
+
 	else:
 		return render_template('settings.html')
 
@@ -169,7 +165,7 @@ def register():
         session['email'] = request.form['email']
         return render_template("index.html")
 
-#route per gestire gli angoli del servo per lo spostamento tramite bottoni
+#route servo motion
 @app.route("/<servo>/<angolo>")
 def move(servo, angolo):
 	global panServoAngle
@@ -180,9 +176,9 @@ def move(servo, angolo):
 	if servo == 'tilt':
 		tiltServoAngle = int(angolo)
 		os.system("python3 angleServoCtrl.py " + str(tiltPin) + " " + str(tiltServoAngle))
-	if servo == 'auto':
+	if servo == 'auto':#TODO --> auto tracking
 		os.system("sudo modprobe bcm2835-v4l2")
-		os.system("python3 face_tracker.py")
+		os.system("python3 face_tracker.py") #BETA
 
 	templateData = {
       'panServoAngle'	: panServoAngle,
@@ -199,7 +195,7 @@ def accessi():
 
 
 if __name__ == '__main__':
-    app.secret_key = os.urandom(12) #cryptazione
+    app.secret_key = os.urandom(12) #crypt
     t = threading.Thread(target=check_for_objects, args=())
     t.daemon = True
     t.start()
