@@ -8,6 +8,24 @@ https://github.com/HackerShackOfficial/Smart-Security-Camera
 The Bootstrap Template used is: SB Admin 2
 https://github.com/BlackrockDigital/startbootstrap-sb-admin-2
 
+## Features:
+
+* Database access(credential,login page and access tracking)
+* Live Streaming 
+* 2 axis (Pan Tilt) movement 
+* small and light, only one cable needed (power)
+* Computer Vision (Identification and notify)
+* Email and password stored in database
+* Web Pages responsive and Mobile friendly
+
+## ToDo:
+
+* Autonomous movement(with 2 servo, when OpenCV detected a person, the camera move autonomously)
+* Add box with the last image captured
+* stored all the image captured in the database
+
+
+
 ## Getting Started
 
 Hardware required:
