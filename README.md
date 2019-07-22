@@ -1,5 +1,5 @@
 # Raspberry-Surveillance
-<img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/1.png"/>
+<img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/2.png"/>
 Raspberry camera Surveillance is a portal with opencv and MYSQL
 
 I use HackerShackOfficial's project as starting point
@@ -50,7 +50,7 @@ codes here
 ```
 ## Assembly
 
-<img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/2.png"/>
+<img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/1.png"/>
 
 ## Create Database
 ```
