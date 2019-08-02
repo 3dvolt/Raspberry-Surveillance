@@ -44,17 +44,23 @@ Software used:
 * OpenCV
 
 
-## Install Dependencies
+## Install OpenCV
+follow this 
+https://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/
+
 ```
-codes here
+source ~/.profile
+workon cv
 ```
 ## Assembly
 
 <img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/1.png"/>
 
 ## Create Database
+
+install mysql
 ```
-codes here
+
 ```
 
 ## Start Program
