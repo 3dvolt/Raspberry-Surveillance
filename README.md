@@ -65,7 +65,7 @@ interface camera enable
 
 ## pip dependencies
 ```
-suimutils
+imutils
 flask
 picamera[array]
 Flask-BasicAuth==0.2.0
