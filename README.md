@@ -46,7 +46,7 @@ Software used:
 
 ## Install OpenCV
 follow this 
-https://www.pyimagesearch.com/2016/04/18/install-guide-raspberry-pi-3-raspbian-jessie-opencv-3/
+https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/
 
 ```
 source ~/.profile
@@ -56,12 +56,33 @@ workon cv
 
 <img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/1.png"/>
 
+## Install
+```
+sudo raspi-config
+interface camera enable
+
+```
+
+## pip dependencies
+```
+suimutils
+flask
+picamera[array]
+Flask-BasicAuth==0.2.0
+pip install mysql-connector
+flask_mysqldb
+RPi.GPIO
+
+```
+
 ## Create Database
 
 install mysql
 ```
-
+sudo apt-get install mariadb-server-10.0 --fix-missing
+sudo mysql
 ```
+create table using .sql file
 
 ## Start Program
 Write inside the folder
