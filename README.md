@@ -28,7 +28,7 @@ https://github.com/BlackrockDigital/startbootstrap-sb-admin-2
 
 ## Getting Started
 
-Hardware required:
+## Hardware required:
 
 * Raspberry pi 3 or higher
 * 2 servo 9g
@@ -44,19 +44,20 @@ Software used:
 * OpenCV
 
 
-## Install OpenCV
+## Install OpenCV:
 follow this 
 https://www.pyimagesearch.com/2018/09/26/install-opencv-4-on-your-raspberry-pi/
 
-```
-source ~/.profile
-workon cv
-```
-## Assembly
+
+## 3d Print and Assembly
 
 <img src="https://raw.githubusercontent.com/3dvolt/Raspberry-Surveillance/master/Render/1.png"/>
 
-## Install
+print the .stl file
+## Camera
+
+enable the raspicamera
+
 ```
 sudo raspi-config
 interface camera enable
@@ -64,6 +65,9 @@ interface camera enable
 ```
 
 ## pip dependencies
+
+pip install
+
 ```
 imutils
 flask
@@ -72,7 +76,6 @@ Flask-BasicAuth==0.2.0
 pip install mysql-connector
 flask_mysqldb
 RPi.GPIO
-
 ```
 
 ## Create Database
@@ -82,11 +85,20 @@ install mysql
 sudo apt-get install mariadb-server-10.0 --fix-missing
 sudo mysql
 ```
-create table using .sql file
+create database and table using .sql file
+
+Edit the email and password.
 
 ## Start Program
-Write inside the folder
+
+```
+source ~/.profile
+workon cv
+```
+
+Write inside the main folder
 ```
 sudo python3 START.py
 ```
+default password root root
 
